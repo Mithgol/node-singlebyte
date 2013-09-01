@@ -1,6 +1,6 @@
 # node-singlebyte
 
-A module for Node.js to support more 1-byte encodings (because standard `Buffer` supports ASCII only).
+A module for Node.js to support more 1-byte encodings (because Node's [`Buffer`](http://nodejs.org/docs/latest/api/buffer.html) supports ASCII only).
 
 # Installing singlebyte
 
