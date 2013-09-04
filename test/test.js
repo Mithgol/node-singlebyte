@@ -24,3 +24,30 @@ describe('Error processing', function(){
       }, RegExp( sb.errors.INVALID_TABLE_LENGTH ));
    });
 });
+
+describe("Fallback to Node's Buffer", function(){
+   it("understands 'ascii' encoding", function(){
+      assert.equal(
+         sb.bufToStr(new Buffer('Mithgol'), 'ascii'),
+         'Mithgol'
+      );
+   });
+   it("understands 'binary' encoding", function(){
+      assert.equal(
+         sb.bufToStr(new Buffer('Mithgol'), 'binary'),
+         'Mithgol'
+      );
+   });
+   it("understands 'hex' encoding", function(){
+      assert.equal(
+         sb.bufToStr(new Buffer('Mithgol'), 'hex'),
+         '4d697468676f6c'
+      );
+   });
+   it("understands 'base64' encoding", function(){
+      assert.equal(
+         sb.bufToStr(new Buffer('Mithgol'), 'base64'),
+         'TWl0aGdvbA=='
+      );
+   });
+});
