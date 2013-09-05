@@ -51,6 +51,21 @@ singlebyte.prototype.getEncodingTable = function(encodingName){
    return null;
 };
 
+singlebyte.prototype.extendASCII = function(extensionTable){
+   var i;
+   var output = [];
+   if( extensionTable.length !== 128 ){
+      throw new Error(this.errors.INVALID_EXTENSION);
+   }
+   for( i = 0; i < 128; i++ ){
+      output.push(i);
+   }
+   for( i = 0; i < extensionTable.length; i++ ){
+      output.push( extensionTable[i] );
+   }
+   return output;
+};
+
 singlebyte.prototype.bufToStr = function(buf, encoding, start, end){
    if(!( Buffer.isBuffer(buf) )){
       throw new Error(this.errors.NOT_A_BUFFER);
@@ -75,6 +90,7 @@ singlebyte.prototype.errors = {
    NOT_A_BUFFER : 'The given source is not a buffer!',
    UNKNOWN_ENCODING : 'The given encoding is not defined!',
    INVALID_TABLE_LENGTH: 'The encoding table must have 256 elements!',
+   INVALID_EXTENSION: 'The ASCII extension table must have 128 elements!',
    BUFFER_ENCODING  : "Cannot redefine a Node's encoding!"
 };
 
