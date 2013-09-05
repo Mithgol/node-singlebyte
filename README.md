@@ -70,7 +70,7 @@ Takes the following parameters:
 
 * `start` (optional, defaults to `0`) and `end` (optional, defaults to `buf.length`) define the starting byte and the ending byte of the source byte sequence in the given Buffer. The `end`th byte is not included; for example, `start == 0` and `end == 1` means that only one (0th) byte is decoded.
 
-If a Buffer's encoding is given, `buf.toString` is called and its result is returned.
+If a Node.js Buffer's encoding is given, `buf.toString` is called and its result is returned.
 
 Otherwise, a string is built of Unicode characters (the codes of these characters are found for each single byte of the source according to the encoding table for the given `encoding`) and returned.
 
