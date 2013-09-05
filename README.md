@@ -30,15 +30,15 @@ You get an object that has the following methods:
 
 ### isEncoding(encodingName)
 
-Returns `true` if the given encoding has been defined, `false` otherwise.
+Returns `true` if the given encoding is known to the module, `false` otherwise.
 
-Works like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/api/buffer.html#buffer_class_method_buffer_isencoding_encoding).
+Works almost like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/api/buffer.html#buffer_class_method_buffer_isencoding_encoding).
 
-Node.js Buffer's encodings are known.
+* Node.js Buffer's encodings are known.
 
-Additionally, `'cp866'` (for [code page 866](http://en.wikipedia.org/wiki/Code_page_866)) is defined in the module.
+* Additionally, `'cp866'` (for [code page 866](http://en.wikipedia.org/wiki/Code_page_866)) is defined in the module.
 
-More encodings can be defined using `learnEncoding` method (see below).
+* More encodings can be defined using `learnEncoding` method (see below).
 
 ### learnEncoding(encodingName, encodingTable)
 
@@ -46,7 +46,7 @@ Defines an encoding.
 
 Expects `encodingName` to be a string and `encodingTable` to be an array of exactly 256 elements.
 
-A single-byte encoding means that each byte correspongs to a character. The value of a byte is always in the `0…255` range, and `encodingTable[i]` defines the character that corresponds to the `i` value of that byte.
+A single-byte encoding means that each byte corresponds to a character. The value of a byte is always in the `0…255` range, and `encodingTable[i]` defines the character that corresponds to the `i` value of that byte.
 
 Each value of the `encodingTable` array is a number (a Unicode code of the corresponding character). If that code is outside of the `0…0x10FFFF` range, an error is thrown.
 
