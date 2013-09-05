@@ -23,6 +23,11 @@ describe('Error processing', function(){
          sb.learnEncoding('foo', [1, 2]);
       }, RegExp( sb.errors.INVALID_TABLE_LENGTH ));
    });
+   it('rejects extension tables of invalid size', function(){
+      assert.throws(function(){
+         sb.extendASCII([1, 2]);
+      }, RegExp( sb.errors.INVALID_EXTENSION ));
+   });
 });
 
 describe("Fallback to Node's Buffer", function(){
@@ -49,5 +54,22 @@ describe("Fallback to Node's Buffer", function(){
          sb.bufToStr(new Buffer('Mithgol'), 'base64'),
          'TWl0aGdvbA=='
       );
+   });
+});
+
+describe("The module's abilities", function(){
+   it('extends ASCII', function(){
+      var i;
+      var extension = [];
+      for( i = 128; i < 256; i++ ){
+         extension.push(i+3);
+      }
+      var extended = sb.extendASCII(extension);
+      for( i = 0; i < 256; i++ ){
+         assert.equal(
+            extended[i],
+            i + ((i >= 128) ? 3 : 0)
+         );
+      }
    });
 });
