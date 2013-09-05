@@ -43,16 +43,16 @@ describe("Fallback to Node's Buffer", function(){
          'Mithgol'
       );
    });
-   it("understands 'hex' encoding", function(){
+   it("understands 'base64' encoding and 'start' value", function(){
       assert.equal(
-         sb.bufToStr(new Buffer('Mithgol'), 'hex'),
-         '4d697468676f6c'
+         sb.bufToStr(new Buffer('Mithgol'), 'base64', 3),
+         'aGdvbA=='
       );
    });
-   it("understands 'base64' encoding", function(){
+   it("understands 'hex' encoding, 'start' and 'end' values", function(){
       assert.equal(
-         sb.bufToStr(new Buffer('Mithgol'), 'base64'),
-         'TWl0aGdvbA=='
+         sb.bufToStr(new Buffer('Mithgol'), 'hex', 0, 6),
+         '4d697468676f'
       );
    });
 });
@@ -71,5 +71,13 @@ describe("The module's abilities", function(){
             i + ((i >= 128) ? 3 : 0)
          );
       }
+   });
+   it("understands 'cp866' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0x8C, 0xA8, 0xE6, 0xA3, 0xAE, 0xAB]), 'cp866'
+         ),
+         'Мицгол'
+      );
    });
 });

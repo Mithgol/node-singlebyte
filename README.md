@@ -1,6 +1,8 @@
 Node's [`Buffer`](http://nodejs.org/docs/latest/api/buffer.html) supports `'ascii'` and `'binary'`, but sometimes you need more single-byte encodings.
 
-This module (`singlebyte`) provides such support.
+This module (`singlebyte`) provides such support for `'cp866'` ([code page 866](http://en.wikipedia.org/wiki/Code_page_866)).
+
+This module can also be used to define more single-byte encodings.
 
 Node.js v0.10 (or newer) is required.
 
@@ -28,7 +30,13 @@ You get an object with the following methods:
 
 Returns `true` if the given encoding has been defined, `false` otherwise.
 
-Works like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/api/buffer.html#buffer_class_method_buffer_isencoding_encoding). More encodings can be defined (see below) in addition to Buffer's.
+Works like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/api/buffer.html#buffer_class_method_buffer_isencoding_encoding).
+
+Node.js Buffer's encodings are known.
+
+Additionally, `'cp866'` (for [code page 866](http://en.wikipedia.org/wiki/Code_page_866)) is defined in the module.
+
+More encodings can be defined using `learnEncoding` method (see below).
 
 ### learnEncoding(encodingName, encodingTable)
 
