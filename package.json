@@ -1,7 +1,7 @@
 {
 "name": "singlebyte",
 "version": "0.1.0",
-"description": "A module for Node.js to support more 1-byte encodings",
+"description": "AÂ module forÂ Node.js toÂ support more 1-byte encodings",
 "main": "singlebyte.js",
 "repository": {
    "type": "git",
