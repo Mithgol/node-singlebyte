@@ -44,10 +44,11 @@ singlebyte.prototype.learnEncoding = function(encodingName, encodingTable){
       throw new Error(this.errors.INVALID_TABLE_LENGTH);
    }
    for( var j = 0; j < encodingTable.length; j++ ){
-      encodingTable[j] = encodingTable[j] |0;
-      if( encodingTable[j] > 0x10FFFF ){
+      var nextCode = encodingTable[j] |0;
+      if( 0 > nextCode || nextCode > 0x10FFFF ){
          throw new Error(this.errors.OUT_OF_UNICODE);
       }
+      encodingTable[j] = nextCode;
    }
 
    if( this.isEncoding(encodingName) ){

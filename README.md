@@ -48,9 +48,9 @@ Expects `encodingName` to be a string and `encodingTable` to be an array of�
 
 A single-byte encoding means that each byte correspongs to a character. The value of a byte is always in the `0…255` range, and `encodingTable[i]` defines the character that corresponds to the `i` value of that byte.
 
-Each value of the `encodingTable` array is a number (a Unicode code of the corresponding character).
+Each value of the `encodingTable` array is a number (a Unicode code of the corresponding character). If that code is outside of the `0…0x10FFFF` range, an error is thrown.
 
-The encodings defined in Node.js Buffer cannot be redefined.
+The encodings defined in Node.js Buffer cannot be redefined. (When such an attempt is made, an error is thrown.)
 
 ### getEncodingTable(encodingName)
 
@@ -86,7 +86,7 @@ If a Node.js Buffer's encoding is given, `buf.toString` is called and its r
 
 Otherwise, a string is built of Unicode characters (the codes of these characters are found for each single byte of the source according to the encoding table for the given `encoding`) and returned.
 
-**Note:**   if the encoding table contains a value in the `0x10000…0x10FFFF` range, the Unicode character for such a byte corresponds to a UTF-16 [surrogate pair](http://en.wikipedia.org/wiki/UTF-16#Code_points_U.2B10000_to_U.2B10FFFF) and thus becomes **two** “characters” in a JavaScript string.
+**Note:**   if the encoding table contains a value in the `0x10000…0x10FFFF` range, the Unicode character for such a byte corresponds to a UTF-16 [surrogate pair](http://en.wikipedia.org/wiki/UTF-16#Code_points_U.2B10000_to_U.2B10FFFF) and thus becomes **two** “characters” in the returned JavaScript string. (In JavaScript the “characters” of a string are actually UTF-16 hexadecets.)
 
 ## Error processing
 

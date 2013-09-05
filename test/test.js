@@ -38,6 +38,16 @@ describe('Error processing', function(){
          sb.learnEncoding('foo', sb.extendASCII(extension));
       }, RegExp( sb.errors.OUT_OF_UNICODE ));
    });
+   it('rejects encoding tables with negative elements', function(){
+      assert.throws(function(){
+         var extension = [];
+         for( var i = 128; i < 256; i++ ){
+            extension.push(i+3);
+         }
+         extension[0] = -56;
+         sb.learnEncoding('foo', sb.extendASCII(extension));
+      }, RegExp( sb.errors.OUT_OF_UNICODE ));
+   });
 });
 
 describe("Fallback to Node's Buffer", function(){
