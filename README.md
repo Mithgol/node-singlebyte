@@ -4,7 +4,7 @@ This module (`singlebyte`) provides such support.
 
 Node.js v0.10 (or newer) is required.
 
-# Installing singlebyte
+## Installing singlebyte
 
 [![(npm package version)](https://badge.fury.io/js/singlebyte.png)](https://npmjs.org/package/singlebyte)
 
@@ -14,7 +14,7 @@ Node.js v0.10 (or newer) is required.
 
 You may visit https://github.com/Mithgol/node-singlebyte#readme occasionally to read the latest `README` because the package's version is not planned to grow after changes when they happen in `README` only. (However, `npm publish --force` may happen eventually.)
 
-# Using singlebyte
+## Using singlebyte
 
 Require the installed module:
 
@@ -24,13 +24,13 @@ var sb = require('singlebyte');
 
 You get an object with the following methods:
 
-## isEncoding(encodingName)
+### isEncoding(encodingName)
 
 Returns `true` if the given encoding has been defined, `false` otherwise.
 
 Works like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/api/buffer.html#buffer_class_method_buffer_isencoding_encoding). More encodings can be defined (see below) in addition to Buffer's.
 
-## learnEncoding(encodingName, encodingTable)
+### learnEncoding(encodingName, encodingTable)
 
 Defines an encoding.
 
@@ -40,7 +40,7 @@ Every (Nth) element is a number, which is the Unicode's code of the corresp
 
 The encodings defined in Node.js Buffer cannot be redefined.
 
-## getEncodingTable(encodingName)
+### getEncodingTable(encodingName)
 
 Returns an array of 256 elements previously given as `encodingTable` for the encoding.
 
@@ -48,7 +48,7 @@ If an encoding was never defined with `learnEncoding`, returns `null`.
 
 **Note:**   for the encodings defined in Node.js Buffer, `isEncoding` returns `true` but `getEncodingTable` returns `null`.
 
-## extendASCII(extensionTable)
+### extendASCII(extensionTable)
 
 Returns an array containing an encoding table of an [extended ASCII](http://en.wikipedia.org/wiki/Extended_ASCII) encoding.
 
@@ -58,7 +58,7 @@ The next 128 codes (128…255) are taken from `extensionTable` (that must have e
 
 Then you may feed the returned array to `learnEncoding` as its second (`encodingTable`) parameter.
 
-## bufToStr(buf, encoding, start, end)
+### bufToStr(buf, encoding, start, end)
 
 Works almost like Node's [`buf.toString`](http://nodejs.org/docs/latest/api/buffer.html#buffer_buf_tostring_encoding_start_end), converting a Buffer to a string.
 
@@ -74,11 +74,11 @@ If a Buffer's encoding is given, `buf.toString` is called and its result is
 
 Otherwise, a string is built of Unicode characters (the codes of these characters are found for each single byte of the source according to the encoding table for the given `encoding`) and returned.
 
-# Error processing
+## Error processing
 
 If an error is encountered, the module throws `new Error('…')` with one of the predefined strings (error descriptions). You may see these strings in the bottom of `singlebyte.js`.
 
-# Testing singlebyte
+## Testing singlebyte
 
 [![(build testing status)](https://travis-ci.org/Mithgol/node-singlebyte.png?branch=master)](https://travis-ci.org/Mithgol/node-singlebyte)
 
@@ -90,6 +90,6 @@ It is necessary to install [Mocha](http://visionmedia.github.io/mocha/) and [JSH
 
 After that you may run `npm test` (in the directory of `singlebyte`) for testing.
 
-# License
+## License
 
 MIT License, see the `LICENSE` file.
