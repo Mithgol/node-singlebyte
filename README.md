@@ -1,3 +1,5 @@
+**A single-byte encoding** means that each byte correspongs to a character.
+
 Node's [`Buffer`](http://nodejs.org/docs/latest/api/buffer.html) supports `'ascii'` and `'binary'`, but sometimes you need more single-byte encodings.
 
 This module (`singlebyte`) provides such support for `'cp866'` ([code page 866](http://en.wikipedia.org/wiki/Code_page_866)).
@@ -44,7 +46,9 @@ Defines an encoding.
 
 Expects `encodingName` to be a string and `encodingTable` to be an array of exactly 256 elements.
 
-Every (Nth) element is a number, which is the Unicode's code of the corresponding (Nth) character in the encoding.
+A single-byte encoding means that each byte correspongs to a character. The value of a byte is always in the `0…255` range, and `encodingTable[i]` defines the character that corresponds to the `i` value of that byte.
+
+Each value of the `encodingTable` array is a number (a Unicode code of the corresponding character).
 
 The encodings defined in Node.js Buffer cannot be redefined.
 
@@ -81,6 +85,8 @@ Takes the following parameters:
 If a Node.js Buffer's encoding is given, `buf.toString` is called and its result is returned.
 
 Otherwise, a string is built of Unicode characters (the codes of these characters are found for each single byte of the source according to the encoding table for the given `encoding`) and returned.
+
+**Note:**   if the encoding table contains a value in the `0x10000…0x10FFFF` range, the Unicode character for such a byte corresponds to a UTF-16 [surrogate pair](http://en.wikipedia.org/wiki/UTF-16#Code_points_U.2B10000_to_U.2B10FFFF) and thus becomes **two** “characters” in a JavaScript string.
 
 ## Error processing
 

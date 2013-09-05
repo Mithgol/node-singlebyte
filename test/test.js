@@ -18,7 +18,7 @@ describe('Error processing', function(){
          sb.learnEncoding('ascii', [1, 2]);
       }, RegExp( sb.errors.BUFFER_ENCODING ));
    });
-   it('rejects tables of invalid size', function(){
+   it('rejects encoding tables of invalid size', function(){
       assert.throws(function(){
          sb.learnEncoding('foo', [1, 2]);
       }, RegExp( sb.errors.INVALID_TABLE_LENGTH ));
@@ -27,6 +27,16 @@ describe('Error processing', function(){
       assert.throws(function(){
          sb.extendASCII([1, 2]);
       }, RegExp( sb.errors.INVALID_EXTENSION ));
+   });
+   it('rejects encoding tables with elements above 0x10FFFF', function(){
+      assert.throws(function(){
+         var extension = [];
+         for( var i = 128; i < 256; i++ ){
+            extension.push(i+3);
+         }
+         extension[0] = 0xFFFFFF;
+         sb.learnEncoding('foo', sb.extendASCII(extension));
+      }, RegExp( sb.errors.OUT_OF_UNICODE ));
    });
 });
 
@@ -78,6 +88,20 @@ describe("The module's abilities", function(){
             new Buffer([0x8C, 0xA8, 0xE6, 0xA3, 0xAE, 0xAB]), 'cp866'
          ),
          'Мицгол'
+      );
+   });
+   it('correctly creates UTF-16 surrogate pairs', function(){
+      var extension = [];
+      for( var i = 128; i < 256; i++ ){
+         extension.push(i+3);
+      }
+      extension[0] = 0x10401;
+      sb.learnEncoding('surrogated', sb.extendASCII(extension));
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0x12, 128]), 'surrogated'
+         ),
+         '\u0012\ud801\udc01'
       );
    });
 });

@@ -45,6 +45,9 @@ singlebyte.prototype.learnEncoding = function(encodingName, encodingTable){
    }
    for( var j = 0; j < encodingTable.length; j++ ){
       encodingTable[j] = encodingTable[j] |0;
+      if( encodingTable[j] > 0x10FFFF ){
+         throw new Error(this.errors.OUT_OF_UNICODE);
+      }
    }
 
    if( this.isEncoding(encodingName) ){
@@ -87,6 +90,7 @@ singlebyte.prototype.extendASCII = function(extensionTable){
 };
 
 singlebyte.prototype.bufToStr = function(buf, encoding, start, end){
+   /* jshint bitwise: false */
    if(!( Buffer.isBuffer(buf) )){
       throw new Error(this.errors.NOT_A_BUFFER);
    }
@@ -100,8 +104,16 @@ singlebyte.prototype.bufToStr = function(buf, encoding, start, end){
    if( typeof start === 'undefined' ) start = 0;
 
    var output = '';
+   var sourceValue;
    for( var i = start; i < end; i++ ){
-      output += String.fromCharCode(table[ buf[i] ]);
+      sourceValue = table[ buf[i] ];
+      if( sourceValue <= 0xFFFF ){
+         output += String.fromCharCode(sourceValue);
+      } else if( 0x10000 <= sourceValue && sourceValue <= 0x10FFFF ){
+         sourceValue -= 0x10000;
+         output += String.fromCharCode( 0xD800 + (sourceValue >> 10) );
+         output += String.fromCharCode( 0xDC00 + (sourceValue & 0x3FF) );
+      } else throw new Error(this.errors.OUT_OF_UNICODE);
    }
    return output;
 };
@@ -109,9 +121,10 @@ singlebyte.prototype.bufToStr = function(buf, encoding, start, end){
 singlebyte.prototype.errors = {
    NOT_A_BUFFER : 'The given source is not a buffer!',
    UNKNOWN_ENCODING : 'The given encoding is not defined!',
-   INVALID_TABLE_LENGTH: 'The encoding table must have 256 elements!',
-   INVALID_EXTENSION: 'The ASCII extension table must have 128 elements!',
-   BUFFER_ENCODING  : "Cannot redefine a Node's encoding!"
+   INVALID_TABLE_LENGTH : 'The encoding table must have 256 elements!',
+   INVALID_EXTENSION : 'The ASCII extension table must have 128 elements!',
+   BUFFER_ENCODING : "Cannot redefine a Node's encoding!",
+   OUT_OF_UNICODE : "An encoding table's element is greater than 0x10FFFF!"
 };
 
 module.exports = singlebyte();
