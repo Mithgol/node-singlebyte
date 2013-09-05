@@ -7,9 +7,6 @@
    "type": "git",
    "url": "git://github.com/Mithgol/node-singlebyte.git"
 },
-"dependencies": {
-   "underscore": "~1.5.1"
-},
 "scripts": {
    "pretest": "jshint singlebyte.js test/test.js",
    "test": "mocha -R spec"

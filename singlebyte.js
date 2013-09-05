@@ -1,5 +1,3 @@
-//var _ = require('underscore');
-
 var singlebyte = function(){
    if(!( this instanceof singlebyte )){
       return new singlebyte();
