@@ -1,4 +1,4 @@
-**A single-byte encoding** means that each byte correspongs to a character.
+A **single-byte encoding** means that each byte corresponds to a character.
 
 Node's [`Buffer`](http://nodejs.org/docs/latest/api/buffer.html) supports `'ascii'` and `'binary'`, but sometimes you need more single-byte encodings.
 
