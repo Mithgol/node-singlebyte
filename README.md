@@ -111,6 +111,23 @@ Otherwise, a string is built of Unicode characters (the codes of these charact
 
 **Note:**   if the encoding table contains a value in the `0x10000…0x10FFFF` range, the Unicode character for such a byte corresponds to a UTF-16 [surrogate pair](http://en.wikipedia.org/wiki/UTF-16#Code_points_U.2B10000_to_U.2B10FFFF) and thus becomes **two** “characters” in the returned JavaScript string. (In JavaScript the “characters” of a string are actually UTF-16 hexadecets.)
 
+### strToBuf(str, encoding, encodingOptions)
+
+Works almost like Node's [`new Buffer(str, encoding)`](http://nodejs.org/docs/latest/api/buffer.html#buffer_new_buffer_str_encoding), converting a string to a Buffer.
+
+Takes the following parameters:
+
+* `str` is a source string.
+
+* `encoding` is either a Node's Buffer encoding or a previously defined single-byte encoding.
+
+* `encodingOptions` (optional) is an object.
+  * `encodingOptions.defaultCode` contains an integer code that is used for characters of `str` that are not present in the encoding table. Defaults to `0x3F` (ASCII code of a question mark, `'?'`).
+
+If a Node.js Buffer's encoding is given, `new Buffer(str, encoding)` is called and its result is returned.
+
+Otherwise, characters are taken sequentially from `str` and a Buffer is built of (single byte) character codes found in the encoding table. (When the table does not contain a byte value corresponding to the Unicode of some character, `encodingOptions.defaultCode` is used.) That Buffer is returned.
+
 ## Error processing
 
 If an error is encountered, the module throws `new Error('…')` with one of the predefined strings (error descriptions). You may see these strings in the bottom of `singlebyte.js`.

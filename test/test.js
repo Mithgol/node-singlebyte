@@ -12,6 +12,9 @@ describe('Error processing', function(){
       assert.throws(function(){
          sb.bufToStr(new Buffer([1, 2]), 'foo');
       }, RegExp( sb.errors.UNKNOWN_ENCODING ));
+      assert.throws(function(){
+         sb.strToBuf('foo', 'bar');
+      }, RegExp( sb.errors.UNKNOWN_ENCODING ));
    });
    it("rejects encodings defined for Node's Buffer", function(){
       assert.throws(function(){
@@ -56,11 +59,19 @@ describe("Fallback to Node's Buffer", function(){
          sb.bufToStr(new Buffer('Mithgol'), 'ascii'),
          'Mithgol'
       );
+      assert.deepEqual(
+         sb.strToBuf('Mithgol', 'ascii'),
+         new Buffer('Mithgol')
+      );
    });
    it("understands 'binary' encoding", function(){
       assert.equal(
          sb.bufToStr(new Buffer('Mithgol'), 'binary'),
          'Mithgol'
+      );
+      assert.deepEqual(
+         sb.strToBuf('Mithgol', 'binary'),
+         new Buffer('Mithgol')
       );
    });
    it("understands 'base64' encoding and 'start' value", function(){
@@ -68,11 +79,19 @@ describe("Fallback to Node's Buffer", function(){
          sb.bufToStr(new Buffer('Mithgol'), 'base64', 3),
          'aGdvbA=='
       );
+      assert.deepEqual(
+         sb.strToBuf('aGdvbA==', 'base64'),
+         new Buffer('aGdvbA==', 'base64')
+      );
    });
    it("understands 'hex' encoding, 'start' and 'end' values", function(){
       assert.equal(
          sb.bufToStr(new Buffer('Mithgol'), 'hex', 0, 6),
          '4d697468676f'
+      );
+      assert.deepEqual(
+         sb.strToBuf('F1d0', 'hex'),
+         new Buffer('F1d0', 'hex')
       );
    });
 });
@@ -99,8 +118,12 @@ describe("The module's abilities", function(){
          ),
          'Мицгол'
       );
+      assert.deepEqual(
+         sb.strToBuf('Мицгол', 'cp866'),
+         new Buffer([0x8C, 0xA8, 0xE6, 0xA3, 0xAE, 0xAB])
+      );
    });
-   it('correctly creates UTF-16 surrogate pairs', function(){
+   it('understands UTF-16 surrogate pairs', function(){
       var extension = [];
       for( var i = 128; i < 256; i++ ){
          extension.push(i+3);
@@ -112,6 +135,20 @@ describe("The module's abilities", function(){
             new Buffer([0x12, 128]), 'surrogated'
          ),
          '\u0012\ud801\udc01'
+      );
+      assert.deepEqual(
+         sb.strToBuf('\u0012\ud801\udc01', 'surrogated'),
+         new Buffer([0x12, 128])
+      );
+   });
+   it('uses encodingOptions.defaultCode', function(){
+      assert.deepEqual(
+         sb.strToBuf('Миѳголъ', 'cp866'),
+         new Buffer([0x8C, 0xA8, 0x3F, 0xA3, 0xAE, 0xAB, 0xEA])
+      );
+      assert.deepEqual(
+         sb.strToBuf('Миѳголъ', 'cp866', { defaultCode: 0x21 }),
+         new Buffer([0x8C, 0xA8, 0x21, 0xA3, 0xAE, 0xAB, 0xEA])
       );
    });
 });
