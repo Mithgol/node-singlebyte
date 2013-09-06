@@ -64,7 +64,7 @@ If an encoding was never defined with `learnEncoding`, returns `null`.
 
 Returns an array containing an encoding table of an [extended ASCII](http://en.wikipedia.org/wiki/Extended_ASCII) encoding.
 
-The first 128 codes (0…127) are numbers from 0 thru 127.
+The first 128 codes (0…127) are numbers from 0 through 127.
 
 The next 128 codes (128…255) are taken from `extensionTable` (that must have exactly 128 elements).
 
