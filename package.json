@@ -1,7 +1,7 @@
 {
 "name": "singlebyte",
-"version": "0.3.0",
-"description": "A module for Node.js to support more 1-byte encodings",
+"version": "1.0.0",
+"description": "Supports more 1-byte encodings than Node.js Buffer",
 "main": "singlebyte.js",
 "repository": {
    "type": "git",
