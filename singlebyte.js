@@ -1,3 +1,5 @@
+var extend = require('util-extend');
+
 var singlebyte = function(){
    if(!( this instanceof singlebyte )){
       return new singlebyte();
@@ -117,6 +119,49 @@ singlebyte.prototype.bufToStr = function(buf, encoding, start, end){
       } else throw new Error(this.errors.OUT_OF_UNICODE);
    }
    return output;
+};
+
+var strToBufDefaults = {
+   defaultCode: 0x3F   // '?'
+};
+
+singlebyte.prototype.strToBuf = function(str, encoding, encodingOptions){
+   if( Buffer.isEncoding(encoding) ){
+      return new Buffer(str, encoding);
+   }
+   str = '' + str;
+   var options = extend(strToBufDefaults, encodingOptions);
+   var table = this.getEncodingTable(encoding);
+   if( table === null ) throw new Error(this.errors.UNKNOWN_ENCODING);
+   var output = [];
+   for( var i = 0; i < str.length; i++ ){
+      var charUnicode;
+      var thisCharCode = str.charCodeAt(i);
+      if( 0xD800 <= thisCharCode && thisCharCode <= 0xDBFF &&
+         i+1 < str.length
+      ){
+         var nextCharCode = str.charCodeAt(i+1);
+         if( 0xDC00 <= nextCharCode && nextCharCode <= 0xDFFF ){
+            charUnicode = 0x10000 + (thisCharCode - 0xD800)*0x400 +
+               (nextCharCode - 0xDC00);
+            i++;
+         } else {
+            charUnicode = thisCharCode;
+         }
+      } else {
+         charUnicode = thisCharCode;
+      }
+      var codeFound = false;
+      for( var j = 0; j < table.length; j++ ){
+         if( charUnicode === table[j] ){
+            codeFound = true;
+            output.push(j);
+            break;
+         }
+      }
+      if( !codeFound ) output.push(options.defaultCode);
+   }
+   return new Buffer(output);
 };
 
 singlebyte.prototype.errors = {
