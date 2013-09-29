@@ -36,7 +36,9 @@ Works almost like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/
 
 * Node.js Buffer's encodings are known.
 
-* Additionally, `'cp866'` (for [code page 866](http://en.wikipedia.org/wiki/Code_page_866)) is defined in the module.
+* Additionally, the following encodings are defined in the module:
+   * `'cp437'` for [code page 437](http://en.wikipedia.org/wiki/Code_page_437)
+   * `'cp866'` for [code page 866](http://en.wikipedia.org/wiki/Code_page_866)
 
 * More encodings can be defined using `learnEncoding` method (see below).
 

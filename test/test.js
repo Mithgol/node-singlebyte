@@ -111,6 +111,18 @@ describe("The module's abilities", function(){
          );
       }
    });
+   it("understands 'cp437' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0x46, 0x81, 0x68, 0x72, 0x65, 0x72]), 'cp437'
+         ),
+         'Führer'
+      );
+      assert.deepEqual(
+         sb.strToBuf('μTorrent', 'cp437'),
+         new Buffer([0xE6, 0x54, 0x6F, 0x72, 0x72, 0x65, 0x6E, 0x74])
+      );
+   });
    it("understands 'cp866' encoding", function(){
       assert.equal(
          sb.bufToStr(
