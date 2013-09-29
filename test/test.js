@@ -135,6 +135,18 @@ describe("The module's abilities", function(){
          new Buffer([0x8C, 0xA8, 0xE6, 0xA3, 0xAE, 0xAB])
       );
    });
+   it("understands 'cp1125' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0x8C, 0xF7, 0xE6, 0xF3, 0xAE, 0xAB]), 'cp1125'
+         ),
+         'Міцґол'
+      );
+      assert.deepEqual(
+         sb.strToBuf('Міцґол', 'cp1125'),
+         new Buffer([0x8C, 0xF7, 0xE6, 0xF3, 0xAE, 0xAB])
+      );
+   });
    it('understands UTF-16 surrogate pairs', function(){
       var extension = [];
       for( var i = 128; i < 256; i++ ){
