@@ -2,7 +2,7 @@ A **single-byte encoding** means that each byte corresponds to a character.
 
 Node's [`Buffer`](http://nodejs.org/docs/latest/api/buffer.html) supports `'ascii'` and `'binary'`, but sometimes you need more single-byte encodings.
 
-This module (`singlebyte`) provides such support for `'cp866'` ([code page 866](http://en.wikipedia.org/wiki/Code_page_866)).
+This module (`singlebyte`) provides such support for several known encodings [(see below)](#isencodingencodingname).
 
 This module can also be used to define more single-byte encodings.
 
@@ -38,6 +38,7 @@ Works almost like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/
 
 * Additionally, the following encodings are defined in the module:
    * `'cp437'` for [code page 437](http://en.wikipedia.org/wiki/Code_page_437)
+   * `'cp808'` for [code page 808](http://www-03.ibm.com/systems/i/software/globalization/codepages.html)
    * `'cp866'` for [code page 866](http://en.wikipedia.org/wiki/Code_page_866)
    * `'cp1125'` for [code page 1125](http://ru.wikipedia.org/wiki/CP1125)
 
