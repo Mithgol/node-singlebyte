@@ -41,6 +41,9 @@ Works almost like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/
    * `'cp808'` for [code page 808](http://www-03.ibm.com/systems/i/software/globalization/codepages.html)
    * `'cp866'` for [code page 866](http://en.wikipedia.org/wiki/Code_page_866)
    * `'cp1125'` for [code page 1125](http://ru.wikipedia.org/wiki/CP1125)
+   * `'koi8-r'` for [KOI8-R](http://en.wikipedia.org/wiki/KOI8-R)
+   * `'koi8-u'` for [KOI8-U](http://en.wikipedia.org/wiki/KOI8-U)
+   * `'koi8-ru'` for [KOI8-RU](http://ru.wikipedia.org/wiki/KOI8-R)
 
 * More encodings can be defined using `learnEncoding` method (see below).
 

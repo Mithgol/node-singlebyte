@@ -159,6 +159,42 @@ describe("The module's abilities", function(){
          new Buffer([0x8C, 0xF7, 0xE6, 0xF3, 0xAE, 0xAB])
       );
    });
+   it("understands 'koi8-r' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0xED, 0xC9, 0xC3, 0xC7, 0xCF, 0xCC]), 'koi8-r'
+         ),
+         'Мицгол'
+      );
+      assert.deepEqual(
+         sb.strToBuf('Мицгол', 'koi8-r'),
+         new Buffer([0xED, 0xC9, 0xC3, 0xC7, 0xCF, 0xCC])
+      );
+   });
+   it("understands 'koi8-u' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0xED, 0xA6, 0xC3, 0xAD, 0xCF, 0xCC]), 'koi8-u'
+         ),
+         'Міцґол'
+      );
+      assert.deepEqual(
+         sb.strToBuf('Міцґол', 'koi8-u'),
+         new Buffer([0xED, 0xA6, 0xC3, 0xAD, 0xCF, 0xCC])
+      );
+   });
+   it("understands 'koi8-ru' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0xBE, 0x2E, 0x20, 0xB4, 0x2E]), 'koi8-ru'
+         ),
+         'Ў. Є.'
+      );
+      assert.deepEqual(
+         sb.strToBuf('Ў. Є.', 'koi8-ru'),
+         new Buffer([0xBE, 0x2E, 0x20, 0xB4, 0x2E])
+      );
+   });
    it('understands UTF-16 surrogate pairs', function(){
       var extension = [];
       for( var i = 128; i < 256; i++ ){
