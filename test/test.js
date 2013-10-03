@@ -195,6 +195,19 @@ describe("The module's abilities", function(){
          new Buffer([0xBE, 0x2E, 0x20, 0xB4, 0x2E])
       );
    });
+   it("understands 'latin-1' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0x41, 0x6E, 0x73, 0x63, 0x68, 0x6C, 0x75, 0xDF]),
+            'latin-1'
+         ),
+         'Anschluß'
+      );
+      assert.deepEqual(
+         sb.strToBuf('Anschluß', 'latin-1'),
+         new Buffer([0x41, 0x6E, 0x73, 0x63, 0x68, 0x6C, 0x75, 0xDF])
+      );
+   });
    it('understands UTF-16 surrogate pairs', function(){
       var extension = [];
       for( var i = 128; i < 256; i++ ){

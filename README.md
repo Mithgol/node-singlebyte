@@ -44,6 +44,7 @@ Works almost like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/
    * `'koi8-r'` for [KOI8-R](http://en.wikipedia.org/wiki/KOI8-R)
    * `'koi8-u'` for [KOI8-U](http://en.wikipedia.org/wiki/KOI8-U)
    * `'koi8-ru'` for [KOI8-RU](http://ru.wikipedia.org/wiki/KOI8-R)
+   * `'latin-1'` for [ISO/IEC 8859-1:1998](http://en.wikipedia.org/wiki/ISO/IEC_8859-1)
 
 * More encodings can be defined using `learnEncoding` method (see below).
 
