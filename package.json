@@ -1,6 +1,6 @@
 {
 "name": "singlebyte",
-"version": "1.0.4",
+"version": "1.0.5",
 "description": "Supports more 1-byte encodings than Node.js Buffer",
 "main": "singlebyte.js",
 "repository": {
