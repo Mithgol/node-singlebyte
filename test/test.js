@@ -159,6 +159,18 @@ describe("The module's abilities", function(){
          new Buffer([0x8C, 0xF7, 0xE6, 0xF3, 0xAE, 0xAB])
       );
    });
+   it("understands 'cp1252' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0x9C, 0x75, 0x76, 0x72, 0x65, 0x99]), 'cp1252'
+         ),
+         'œuvre™'
+      );
+      assert.deepEqual(
+         sb.strToBuf('šokolaad', 'cp1252'),
+         new Buffer([0x9A, 0x6F, 0x6B, 0x6F, 0x6C, 0x61, 0x61, 0x64])
+      );
+   });
    it("understands 'koi8-r' encoding", function(){
       assert.equal(
          sb.bufToStr(
