@@ -39,6 +39,8 @@ Works almost like Node.js Buffer's [`isEncoding`](http://nodejs.org/docs/latest/
 * Additionally, the following encodings are defined in the module:
    * `'cp437'` for [code page 437](http://en.wikipedia.org/wiki/Code_page_437)
    * `'cp808'` for [code page 808](http://www-03.ibm.com/systems/i/software/globalization/codepages.html)
+   * `'cp850'` for [code page 850](http://en.wikipedia.org/wiki/Code_page_850)
+   * `'cp858'` for [code page 858](http://en.wikipedia.org/wiki/Code_page_858)
    * `'cp866'` for [code page 866](http://en.wikipedia.org/wiki/Code_page_866)
    * `'cp1125'` for [code page 1125](http://ru.wikipedia.org/wiki/CP1125)
    * `'cp1252'` for [code page Windows-1252](http://en.wikipedia.org/wiki/Windows-1252)

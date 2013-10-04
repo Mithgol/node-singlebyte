@@ -123,6 +123,32 @@ describe("The module's abilities", function(){
          new Buffer([0xE6, 0x54, 0x6F, 0x72, 0x72, 0x65, 0x6E, 0x74])
       );
    });
+   it("understands 'cp850' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0x73,0xD5,0x6B,0xD5,0x73,0xD5,0x6E,0x63,0x61]),
+            'cp850'
+         ),
+         'sıkısınca'
+      );
+      assert.deepEqual(
+         sb.strToBuf('gêm', 'cp850'),
+         new Buffer([0x67, 0x88, 0x6D])
+      );
+   });
+   it("understands 'cp858' encoding", function(){
+      assert.equal(
+         sb.bufToStr(
+            new Buffer([0xD5, 0x3D, 0x9F, 0x32, 0x2E, 0x32, 0x30, 0x34]),
+            'cp858'
+         ),
+         '€=ƒ2.204'
+      );
+      assert.deepEqual(
+         sb.strToBuf('þorn', 'cp858'),
+         new Buffer([0xE7, 0x6F, 0x72, 0x6E])
+      );
+   });
    it("understands 'cp808' encoding", function(){
       assert.equal(
          sb.bufToStr(
