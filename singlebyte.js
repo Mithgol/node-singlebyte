@@ -1,4 +1,4 @@
-var extend = require('util-extend');
+var extend = require('util')._extend;
 
 var singlebyte = function(){
    /* jshint indent: false */
