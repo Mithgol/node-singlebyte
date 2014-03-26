@@ -10,7 +10,7 @@ Node.js v0.10 (or newer) is required.
 
 ## Installing singlebyte
 
-[![(npm package version)](https://badge.fury.io/js/singlebyte.png)](https://npmjs.org/package/singlebyte)
+[![(npm package version)](https://nodei.co/npm/singlebyte.png?compact=true)](https://npmjs.org/package/singlebyte)
 
 * Latest packaged version: `npm install singlebyte`
 
