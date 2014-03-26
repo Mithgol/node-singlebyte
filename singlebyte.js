@@ -246,13 +246,15 @@ singlebyte.prototype.learnEncoding = function(encodingName, encodingTable){
    if( encodingTable.length !== 256 ){
       throw new Error(this.errors.INVALID_TABLE_LENGTH);
    }
-   for( var j = 0; j < encodingTable.length; j++ ){
-      var nextCode = encodingTable[j] |0;
+
+   var _this = this;
+   encodingTable = encodingTable.map(function(item){
+      var nextCode = item |0;
       if( 0 > nextCode || nextCode > 0x10FFFF ){
-         throw new Error(this.errors.OUT_OF_UNICODE);
+         throw new Error(_this.errors.OUT_OF_UNICODE);
       }
-      encodingTable[j] = nextCode;
-   }
+      return item;
+   });
 
    if( this.isEncoding(encodingName) ){
       for( var i = 0; i < this.encodings.length; i++ ){
@@ -279,18 +281,13 @@ singlebyte.prototype.getEncodingTable = function(encodingName){
 };
 
 singlebyte.prototype.extendASCII = function(extensionTable){
-   var i;
-   var output = [];
    if( extensionTable.length !== 128 ){
       throw new Error(this.errors.INVALID_EXTENSION);
    }
-   for( i = 0; i < 128; i++ ){
-      output.push(i);
-   }
-   for( i = 0; i < extensionTable.length; i++ ){
-      output.push( extensionTable[i] );
-   }
-   return output;
+
+   var output = [];
+   for( var i = 0; i < 128; i++ ) output.push(i);
+   return output.concat(extensionTable);
 };
 
 singlebyte.prototype.bufToStr = function(buf, encoding, start, end){
@@ -352,15 +349,13 @@ singlebyte.prototype.strToBuf = function(str, encoding, encodingOptions){
       } else {
          charUnicode = thisCharCode;
       }
-      var codeFound = false;
-      for( var j = 0; j < table.length; j++ ){
-         if( charUnicode === table[j] ){
-            codeFound = true;
-            output.push(j);
-            break;
-         }
+
+      var codeFoundIndex = table.indexOf(charUnicode);
+      if( codeFoundIndex < 0 ){
+         output.push(options.defaultCode);
+      } else {
+         output.push(codeFoundIndex);
       }
-      if( !codeFound ) output.push(options.defaultCode);
    }
    return new Buffer(output);
 };
