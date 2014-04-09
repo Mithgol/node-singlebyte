@@ -145,7 +145,7 @@ If an error is encountered, the module throws `new Error('…')` with one of t
 
 ## Testing singlebyte
 
-[![(build testing status)](https://travis-ci.org/Mithgol/node-singlebyte.png?branch=master)](https://travis-ci.org/Mithgol/node-singlebyte)
+[![(build testing status)](https://travis-ci.org/Mithgol/node-singlebyte.svg?branch=master)](https://travis-ci.org/Mithgol/node-singlebyte)
 
 It is necessary to install [Mocha](http://visionmedia.github.io/mocha/) and [JSHint](http://jshint.com/) for testing.
 
