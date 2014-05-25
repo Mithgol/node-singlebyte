@@ -1,4 +1,4 @@
-var extend = require('util')._extend;
+var extend = require('extend');
 
 var singlebyte = function(){
    /* jshint indent: false */
@@ -328,7 +328,7 @@ singlebyte.prototype.strToBuf = function(str, encoding, encodingOptions){
       return new Buffer(str, encoding);
    }
    str = '' + str;
-   var options = extend(strToBufDefaults, encodingOptions);
+   var options = extend({}, strToBufDefaults, encodingOptions);
    var table = this.getEncodingTable(encoding);
    if( table === null ) throw new Error(this.errors.UNKNOWN_ENCODING);
    var output = [];
