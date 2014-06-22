@@ -1,6 +1,6 @@
 ## This module is abandoned
 
-[![(status: abandoned)](http://img.shields.io/badge/status-abandoned-aa2200.svg)
+![(status: abandoned)](http://img.shields.io/badge/status-abandoned-aa2200.svg)
 
 The [`iconv-lite`](https://github.com/ashtuchkin/iconv-lite) module supports more encodings than this module (`singlebyte`).
 
