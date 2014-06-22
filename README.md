@@ -1,3 +1,13 @@
+## This module is abandoned
+
+[![(status: abandoned)](http://img.shields.io/badge/status-abandoned-aa2200.svg)
+
+The [`iconv-lite`](https://github.com/ashtuchkin/iconv-lite) module supports more encodings than this module (`singlebyte`).
+
+Consider using `iconv-lite` instead of this module.
+
+## Description
+
 A **single-byte encoding** means that each byte corresponds to a character.
 
 Node's [`Buffer`](http://nodejs.org/docs/latest/api/buffer.html) supports `'ascii'` and `'binary'`, but sometimes you need more single-byte encodings.
