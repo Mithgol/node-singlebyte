@@ -1,8 +1,10 @@
 {
 "name": "singlebyte",
-"version": "1.0.12",
-"description": "Supports more 1-byte encodings than Node.js Buffer",
 "main": "singlebyte.js",
+"version": "1.0.13",
+"description": "Supports more 1-byte encodings than Node.js Buffer",
+"author": { "name": "Mithgol the Webmaster" },
+"license": "MIT",
 "repository": {
    "type": "git",
    "url": "git://github.com/Mithgol/node-singlebyte.git"
